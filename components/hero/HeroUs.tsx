@@ -1,0 +1,38 @@
+import Image from "next/image";
+import type { HeroProps } from "@/types/hero";
+import "./hero.css";
+
+/**
+ * US-region hero with American spelling, pricing cue, and a warmer visual tone.
+ */
+export function HeroUs({ className = "" }: HeroProps) {
+  return (
+    <section className={`hero hero--us ${className}`.trim()} aria-label="Hoggies United States hero">
+      <div className="hero__media" aria-hidden="true">
+        <Image
+          src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=2400&q=80"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+        />
+      </div>
+      <div className="hero__veil" aria-hidden="true" />
+      <div className="hero__content">
+        <p className="hero__brand">Hoggies</p>
+        <h1 className="hero__headline">Your new favorite weekend bite.</h1>
+        <p className="hero__copy">
+          Slow-smoked sandwiches, bold sides, and nationwide delivery from $12.
+        </p>
+        <div className="hero__actions">
+          <a className="hero__cta" href="#order">
+            Order now
+          </a>
+          <a className="hero__cta hero__cta--ghost" href="#menu">
+            See the menu
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
