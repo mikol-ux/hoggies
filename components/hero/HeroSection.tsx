@@ -52,10 +52,17 @@ async function getDistinctId(): Promise<string> {
 }
 
 /**
- * Reads the visitor country from hosting geo headers, then optional local override.
+ * Reads the visitor country from cookie, hosting geo headers, then optional local override.
  * Local `next dev` has no Vercel geo, so set DEV_COUNTRY=US (or GB) while testing.
  */
-function getRequestCountry(headersList: Headers): string {
+async function getRequestCountry(headersList: Headers): Promise<string> {
+  const cookieStore = await cookies();
+  const cookieCountry = cookieStore.get("visitor_country")?.value;
+
+  if (cookieCountry && cookieCountry !== "ZZ") {
+    return cookieCountry.toUpperCase();
+  }
+
   const vercelCountry = headersList.get("x-vercel-ip-country");
   if (vercelCountry && vercelCountry !== "ZZ") {
     return vercelCountry.toUpperCase();
@@ -81,9 +88,10 @@ function getRequestCountry(headersList: Headers): string {
  */
 async function decideAndTrackHero(override?: HeroRegion): Promise<HeroDecision> {
   const headersList = await headers();
-  const country = getRequestCountry(headersList);
+  const country = await getRequestCountry(headersList);
   const distinctId = await getDistinctId();
   const posthog = createPostHogClient();
+  const knownCountry = country !== "ZZ";
 
   let decision: HeroDecision;
 
@@ -109,12 +117,16 @@ async function decideAndTrackHero(override?: HeroRegion): Promise<HeroDecision> 
     };
   } else {
     // Ask PostHog which multivariate variant this visitor should receive.
-    // Configure country rules on the flag itself in the PostHog UI.
+    // Only pass country when known so we do not poison targeting with ZZ.
+    const personProperties = knownCountry
+      ? {
+          country,
+          $geoip_country_code: country,
+        }
+      : undefined;
+
     const variant = await posthog.getFeatureFlag(HERO_FLAG_KEY, distinctId, {
-      personProperties: {
-        country,
-        $geoip_country_code: country,
-      },
+      personProperties,
     });
 
     const { region, flagVariant } = regionFromFlag(variant);

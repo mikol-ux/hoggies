@@ -46,25 +46,54 @@ export function regionFromFlag(variant: string | boolean | undefined): {
 }
 
 /**
+ * Returns true when the country code is a real ISO value (not unknown).
+ */
+export function isKnownCountry(country: string): boolean {
+  return Boolean(country) && country !== "ZZ" && country !== "XX" && country !== "T1";
+}
+
+/**
  * Sends a hero impression event so PostHog can monitor views by country and variant.
- * Also sets person properties so country appears in the Feature flag filter picker.
+ * Only sets person country when known, so we never overwrite GeoIP with ZZ.
  */
 export function captureHeroViewed(posthog: PostHog, decision: HeroDecision): void {
+  const knownCountry = isKnownCountry(decision.country);
+
+  if (knownCountry) {
+    posthog.capture({
+      distinctId: decision.distinctId,
+      event: "hero_viewed",
+      properties: {
+        hero: decision.region,
+        country: decision.country,
+        $geoip_country_code: decision.country,
+        hero_flag_key: decision.flagKey,
+        hero_flag_variant: decision.flagVariant,
+        decision_source: decision.source,
+        country_known: true,
+        $set: {
+          country: decision.country,
+          $geoip_country_code: decision.country,
+          last_hero_seen: decision.region,
+          last_hero_country: decision.country,
+        },
+      },
+    });
+    return;
+  }
+
+  // Unknown country: do not $set country/ZZ over PostHog's own GeoIP data.
   posthog.capture({
     distinctId: decision.distinctId,
     event: "hero_viewed",
     properties: {
       hero: decision.region,
-      country: decision.country,
-      $geoip_country_code: decision.country,
       hero_flag_key: decision.flagKey,
       hero_flag_variant: decision.flagVariant,
       decision_source: decision.source,
+      country_known: false,
       $set: {
-        country: decision.country,
-        $geoip_country_code: decision.country,
         last_hero_seen: decision.region,
-        last_hero_country: decision.country,
       },
     },
   });
