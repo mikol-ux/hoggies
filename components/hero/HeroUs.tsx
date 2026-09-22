@@ -1,13 +1,19 @@
 import Image from "next/image";
 import type { HeroProps } from "@/types/hero";
+import { HeroCta } from "./HeroCta";
 import "./hero.css";
 
 /**
  * US-region hero with clear United States labeling and American market copy.
  */
-export function HeroUs({ className = "" }: HeroProps) {
+export function HeroUs({ className = "", country = "US" }: HeroProps) {
   return (
-    <section className={`hero hero--us ${className}`.trim()} aria-label="Hoggies United States hero">
+    <section
+      className={`hero hero--us ${className}`.trim()}
+      aria-label="Hoggies United States hero"
+      data-hero="us"
+      data-country={country}
+    >
       <div className="hero__media" aria-hidden="true">
         <Image
           src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=2400&q=80"
@@ -26,12 +32,12 @@ export function HeroUs({ className = "" }: HeroProps) {
           Slow-smoked sandwiches built for the USA — bold sides and nationwide delivery from $12.
         </p>
         <div className="hero__actions">
-          <a className="hero__cta" href="#order">
+          <HeroCta className="hero__cta" href="#order" hero="us" country={country} action="order">
             Order across the US
-          </a>
-          <a className="hero__cta hero__cta--ghost" href="#menu">
+          </HeroCta>
+          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="us" country={country} action="menu">
             See the US menu
-          </a>
+          </HeroCta>
         </div>
       </div>
     </section>
