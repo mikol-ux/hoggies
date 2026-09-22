@@ -6,13 +6,12 @@ import "./hero.css";
 /**
  * UK-region hero with clear United Kingdom labeling and British market copy.
  */
-export function HeroUk({ className = "", country = "GB" }: HeroProps) {
+export function HeroUk({ className = "" }: HeroProps) {
   return (
     <section
       className={`hero hero--uk ${className}`.trim()}
       aria-label="Hoggies United Kingdom hero"
       data-hero="uk"
-      data-country={country}
     >
       <div className="hero__media" aria-hidden="true">
         <Image
@@ -32,10 +31,10 @@ export function HeroUk({ className = "", country = "GB" }: HeroProps) {
           Slow-cooked rolls made for the UK — seasonal sides and delivery from £9, coast to coast.
         </p>
         <div className="hero__actions">
-          <HeroCta className="hero__cta" href="#order" hero="uk" country={country} action="order">
+          <HeroCta className="hero__cta" href="#order" hero="uk" action="order">
             Order across the UK
           </HeroCta>
-          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="uk" country={country} action="menu">
+          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="uk" action="menu">
             See the UK menu
           </HeroCta>
         </div>

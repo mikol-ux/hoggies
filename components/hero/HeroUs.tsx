@@ -6,13 +6,12 @@ import "./hero.css";
 /**
  * US-region hero with clear United States labeling and American market copy.
  */
-export function HeroUs({ className = "", country = "US" }: HeroProps) {
+export function HeroUs({ className = "" }: HeroProps) {
   return (
     <section
       className={`hero hero--us ${className}`.trim()}
       aria-label="Hoggies United States hero"
       data-hero="us"
-      data-country={country}
     >
       <div className="hero__media" aria-hidden="true">
         <Image
@@ -32,10 +31,10 @@ export function HeroUs({ className = "", country = "US" }: HeroProps) {
           Slow-smoked sandwiches built for the USA — bold sides and nationwide delivery from $12.
         </p>
         <div className="hero__actions">
-          <HeroCta className="hero__cta" href="#order" hero="us" country={country} action="order">
+          <HeroCta className="hero__cta" href="#order" hero="us" action="order">
             Order across the US
           </HeroCta>
-          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="us" country={country} action="menu">
+          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="us" action="menu">
             See the US menu
           </HeroCta>
         </div>

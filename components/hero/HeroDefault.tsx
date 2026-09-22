@@ -6,13 +6,12 @@ import "./hero.css";
 /**
  * Default hero for visitors outside the US and UK, labeled as the worldwide experience.
  */
-export function HeroDefault({ className = "", country = "ZZ" }: HeroProps) {
+export function HeroDefault({ className = "" }: HeroProps) {
   return (
     <section
       className={`hero hero--world ${className}`.trim()}
       aria-label="Hoggies worldwide hero"
       data-hero="default"
-      data-country={country}
     >
       <div className="hero__media" aria-hidden="true">
         <Image
@@ -32,10 +31,10 @@ export function HeroDefault({ className = "", country = "ZZ" }: HeroProps) {
           Serving guests outside the US and UK — slow-cooked classics and local delivery that arrives hot.
         </p>
         <div className="hero__actions">
-          <HeroCta className="hero__cta" href="#order" hero="default" country={country} action="order">
+          <HeroCta className="hero__cta" href="#order" hero="default" action="order">
             Order worldwide
           </HeroCta>
-          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="default" country={country} action="menu">
+          <HeroCta className="hero__cta hero__cta--ghost" href="#menu" hero="default" action="menu">
             Explore the menu
           </HeroCta>
         </div>

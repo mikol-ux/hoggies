@@ -5,13 +5,13 @@ import type { HeroCtaProps } from "@/types/hero";
 
 /**
  * Hero CTA link that reports clicks to PostHog for funnel monitoring.
+ * Country is added automatically by PostHog GeoIP on the client event.
  */
 export function HeroCta({
   href,
   children,
   className = "",
   hero,
-  country,
   action,
 }: HeroCtaProps) {
   /**
@@ -20,7 +20,6 @@ export function HeroCta({
   function handleClick(): void {
     posthog.capture("hero_cta_clicked", {
       hero,
-      country,
       cta: action,
       href,
     });
