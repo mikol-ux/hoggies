@@ -3,7 +3,7 @@ import type { HeroProps } from "@/types/hero";
 import "./hero.css";
 
 /**
- * UK-region hero with British spelling, pricing cue, and a cooler visual tone.
+ * UK-region hero with clear United Kingdom labeling and British market copy.
  */
 export function HeroUk({ className = "" }: HeroProps) {
   return (
@@ -19,17 +19,18 @@ export function HeroUk({ className = "" }: HeroProps) {
       </div>
       <div className="hero__veil" aria-hidden="true" />
       <div className="hero__content">
+        <p className="hero__region">United Kingdom</p>
         <p className="hero__brand">Hoggies</p>
-        <h1 className="hero__headline">Your new favourite weekend treat.</h1>
+        <h1 className="hero__headline">Proper British comfort food.</h1>
         <p className="hero__copy">
-          Proper slow-cooked rolls, seasonal sides, and UK-wide delivery from £9.
+          Slow-cooked rolls made for the UK — seasonal sides and delivery from £9, coast to coast.
         </p>
         <div className="hero__actions">
           <a className="hero__cta" href="#order">
-            Order now
+            Order across the UK
           </a>
           <a className="hero__cta hero__cta--ghost" href="#menu">
-            Browse the menu
+            See the UK menu
           </a>
         </div>
       </div>

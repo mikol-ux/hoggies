@@ -48,6 +48,21 @@
   padding-bottom: clamp(3rem, 8vw, 5.5rem);
 }
 
+.hero__region {
+  margin: 0;
+  width: fit-content;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--hero-citrus);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hero-fog);
+  opacity: 0;
+  animation: hero-rise 0.9s ease forwards 0.05s;
+}
+
 .hero__brand {
   margin: 0;
   font-family: var(--font-display), Georgia, serif;
@@ -126,25 +141,53 @@
 }
 
 .hero--us {
+  --hero-ink: #1c1208;
   --hero-citrus: #ffb703;
   --hero-ember: #fb8500;
 }
 
 .hero--us .hero__veil {
   background:
-    linear-gradient(115deg, rgba(28, 18, 8, 0.9) 0%, rgba(28, 18, 8, 0.5) 50%, rgba(28, 18, 8, 0.15) 100%),
-    linear-gradient(to top, rgba(28, 18, 8, 0.8) 0%, transparent 45%);
+    linear-gradient(115deg, rgba(28, 18, 8, 0.92) 0%, rgba(90, 35, 8, 0.55) 48%, rgba(28, 18, 8, 0.18) 100%),
+    linear-gradient(to top, rgba(28, 18, 8, 0.82) 0%, transparent 45%);
+}
+
+.hero--us .hero__content {
+  align-items: flex-start;
 }
 
 .hero--uk {
-  --hero-citrus: #7dd3c7;
-  --hero-ink: #102029;
+  --hero-ink: #0b1c33;
+  --hero-citrus: #9ecbff;
+  --hero-fog: #f3f7fb;
 }
 
 .hero--uk .hero__veil {
   background:
-    linear-gradient(100deg, rgba(16, 32, 41, 0.9) 0%, rgba(16, 32, 41, 0.52) 48%, rgba(16, 32, 41, 0.18) 100%),
-    linear-gradient(to top, rgba(16, 32, 41, 0.78) 0%, transparent 42%);
+    linear-gradient(100deg, rgba(11, 28, 51, 0.94) 0%, rgba(20, 55, 95, 0.58) 48%, rgba(11, 28, 51, 0.2) 100%),
+    linear-gradient(to top, rgba(11, 28, 51, 0.8) 0%, transparent 42%);
+}
+
+.hero--uk .hero__content {
+  margin-left: auto;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.hero--uk .hero__headline,
+.hero--uk .hero__copy {
+  margin-left: auto;
+}
+
+.hero--world {
+  --hero-ink: #14201a;
+  --hero-citrus: #d4f35c;
+}
+
+.hero--world .hero__veil {
+  background:
+    linear-gradient(105deg, rgba(20, 32, 26, 0.9) 0%, rgba(35, 70, 45, 0.55) 48%, rgba(20, 32, 26, 0.2) 100%),
+    linear-gradient(to top, rgba(20, 32, 26, 0.78) 0%, transparent 42%);
 }
 
 @keyframes hero-rise {
@@ -169,6 +212,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero__media img,
+  .hero__region,
   .hero__brand,
   .hero__headline,
   .hero__copy,

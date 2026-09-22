@@ -3,7 +3,7 @@ import type { HeroProps } from "@/types/hero";
 import "./hero.css";
 
 /**
- * US-region hero with American spelling, pricing cue, and a warmer visual tone.
+ * US-region hero with clear United States labeling and American market copy.
  */
 export function HeroUs({ className = "" }: HeroProps) {
   return (
@@ -19,17 +19,18 @@ export function HeroUs({ className = "" }: HeroProps) {
       </div>
       <div className="hero__veil" aria-hidden="true" />
       <div className="hero__content">
+        <p className="hero__region">United States</p>
         <p className="hero__brand">Hoggies</p>
-        <h1 className="hero__headline">Your new favorite weekend bite.</h1>
+        <h1 className="hero__headline">Made for American weekends.</h1>
         <p className="hero__copy">
-          Slow-smoked sandwiches, bold sides, and nationwide delivery from $12.
+          Slow-smoked sandwiches built for the USA — bold sides and nationwide delivery from $12.
         </p>
         <div className="hero__actions">
           <a className="hero__cta" href="#order">
-            Order now
+            Order across the US
           </a>
           <a className="hero__cta hero__cta--ghost" href="#menu">
-            See the menu
+            See the US menu
           </a>
         </div>
       </div>
